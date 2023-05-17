@@ -9,12 +9,19 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from dotenv import load_dotenv
 import os
+from selenium.webdriver.chrome.options import Options
 
 load_dotenv()
 letter_text=os.getenv('LETTER_TEXT')
 
 def script():
-    with webdriver.Chrome() as browser:
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+
+    with webdriver.Chrome(options=chrome_options) as browser:
+        logger.info('Старт')
         browser.get('https://hh.ru/account/login?backurl=%2F&hhtmFrom=main')
         button = browser.find_elements(By.CLASS_NAME, 'bloko-link.bloko-link_pseudo')
         button[1].click()
@@ -101,9 +108,9 @@ def script():
             except (NoSuchElementException, ElementClickInterceptedException, ElementNotInteractableException, TimeoutException) as e:
                 logger.warning(
                     f'Не удалось найти кнопку "Откликнуться" на {link} или произошла ошибка при клике, пропускаем. Ошибка: {str(e)}')
-
-schedule.every().day.at("09:00").do(script)
-logger.info('Скрипт запущен')
+        logger.info('Скрипт остановлен')
+schedule.every().day.at("04:05").do(script)
+logger.info('Скрипт запущен и ожидает начала запуска')
 
 while True:
     schedule.run_pending()

@@ -1,0 +1,5 @@
+selenium
+selenium-wire
+python-dotenv
+loguru
+schedule
