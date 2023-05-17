@@ -10,6 +10,8 @@ PASSWORD=...
 
 LETTER_TEXT=...(текст сопроводительного письма)
 
+В файле bot.py в строке schedule.every().day.at("10:35").do(script) -> установите время начала выполнения скрипта.
+
 Введите команду: 
 
 docker build -t hh-grabber .
