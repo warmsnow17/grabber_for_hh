@@ -34,3 +34,4 @@ docker run -d hh-grabber
             browser.get('https://hh.ru/account/login?backurl=%2F&hhtmFrom=main')
     ...
 
+В переменную search_request внесите свой запрос по желаемой вакансии на hh.ru. По умолчанию запрос составлен навакансию python backend developer
